@@ -1,7 +1,8 @@
 # python_keras_lego
 
 ##Overview
-This code implements an image classification model to identify LEGO pieces utilising the Keras deep-learning framework. This project has been inspired by an article on the IEE Spectrum website which detailed a LEGO sorting machine that used a machine learning model to classify individual LEGO pieces. 
+This code implements an image classification model to identify LEGO pieces utilising the Keras deep-learning framework. 
+This project has been inspired by an article on the IEE Spectrum website which detailed a LEGO sorting machine that used a machine learning model to classify individual LEGO pieces. 
 
 ##Dataset
 For the purposes of the initial version of the model, images of Lego bricks have been sourced from a public dataset available from the statistical learning website Kaggle.com [(link)](https://www.kaggle.com/joosthazelzet/lego-brick-images).
