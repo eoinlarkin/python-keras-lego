@@ -1,3 +1,4 @@
+#%%
 import numpy as np
 import os
 import cv2
@@ -6,8 +7,10 @@ import cv2
 ### Defining our Data Directory
 #####################################################################
 
+#%%
 # Directory with Data
-DATADIR = "C:/Data/Lego/"
+os.chdir("C:/Users/Eoin/OneDrive/Data Science/Github/python_keras_lego") #Changing the working directory
+DATADIR = os.getcwd() +  "/Lego/"
 
 DATADIR_valid = DATADIR+ "valid"
 DATADIR_train = DATADIR+ "train"
@@ -17,8 +20,8 @@ SIZE = 32
 
 #####################################################################
 ### FITTING OUR KERAS MODEL
-#####################################################################
-
+####################################################################
+#%%
 import tensorflow as tf
 from tqdm import tqdm
 from tensorflow.keras.datasets import cifar10
@@ -30,9 +33,9 @@ import sklearn.preprocessing as skp
 import random
 from numpy.random import seed
 seed(1) #Setting random seed to ensure consistent results
-from tensorflow import set_random_seed
-set_random_seed(2)
+tf.random.set_seed(2)
 
+#%%
 #Following function creates our Keras model data by loading the resized data from the data folder
 def create_keras_data(DIR):
     keras_data = []
@@ -49,6 +52,7 @@ def create_keras_data(DIR):
     random.shuffle(keras_data)
     return keras_data
 
+#%%
 #Following function formats our Keras data, splitting between data and categories
 def format_keras_data(data):
     X = []
@@ -62,6 +66,7 @@ def format_keras_data(data):
     X = tf.keras.utils.normalize(X, axis=-1, order=1)#L1 normalization
     return X,Y
 
+#%%
 training_data = create_keras_data(DATADIR_train) 
 valid_data = create_keras_data(DATADIR_valid)
 X,Y = format_keras_data(training_data)
@@ -70,12 +75,11 @@ X_valid, Y_valid = format_keras_data(valid_data)
 ###################################
 ##KERAS Model Definition
 ##################################
-
+#%%
 model = Sequential()
 from numpy.random import seed
 seed(1) #Setting random seed to ensure consistent results
-from tensorflow import set_random_seed
-set_random_seed(2)
+tf.random.set_seed(2)
 
 
 model.add(Conv2D(128, (3, 3), input_shape=X.shape[1:]))
@@ -95,6 +99,7 @@ model.compile(loss='sparse_categorical_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
 
+#%%
 #Calculating accuracy by class
 def keras_accuracy(X,Y):
     accuracy = [0,0,0,0]
@@ -130,7 +135,7 @@ accuracy_valid =keras_accuracy(X_valid,Y_valid)
 ###################################################
 ##############BOKEH PLOTTING#######################
 ###################################################
-
+#%%
 from bokeh.io import show
 from bokeh.io import output_file 
 from bokeh.models import ColumnDataSource, FactorRange
@@ -143,7 +148,7 @@ from bokeh.layouts import row
 #-------------------------------------------------#
 #----Plotting the block Shapes as Images----------#
 #-------------------------------------------------#
-
+#%%
 #Path names of first shape in each directory
 def brick_path(n):
     fullpath = []
@@ -168,7 +173,7 @@ p4.image_url(url=[fullpath[3]] , x=0, y=0, w=1, h=1,anchor="bottom_left")
 show(row(p1, p2, p3, p4))
 #export_png(row(p1, p2, p3, p4), filename="plot_blocks_raw.png")
 
-
+#%%
 #-------------------------------------------------#
 #----Plotting the block Shapes as Images----------#
 #-------------------------------------------------#
@@ -193,6 +198,7 @@ p4.image(image=[p4_new], x=0, y=0, dw=256, dh=256, palette="Viridis256")
 show(row(p1, p2, p3, p4))
 #export_png(row(p1, p2, p3, p4), filename="plot_blocks_resized.png")
 
+#%%
 #-------------------------------------------------#
 #--------------Line plot of fit Accuracy----------#
 #-------------------------------------------------#
@@ -258,3 +264,6 @@ bokeh_accuracy(accuracy_train, accuracy_valid, "Training", "Validtion", "Model A
 #bokeh_accuracy(accuracy_valid, accuracy_valid_15e, "Validation - 3 Epochs", "Validation - 15 Epochs", "Model Accuracy for Validation Datasets - Epochs 3 vs 15")
 
 #
+
+
+# %%
