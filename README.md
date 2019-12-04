@@ -19,8 +19,8 @@ For the purposes of training and testing the initial version of the model, I hav
 
 ## Modified Dataset
 For the Keras framework, best practices indicates that it is useful to “simplify” the input images in order to obtain a more efficient model output and to reduce run times.
-The raw input images from my dataset are of 200 pixels by 200 pixels with 3 dimensions (RGB colour space) . Initially I will resize my images to 32 pixels by 32 pixels with 1 dimension of colour.
-As we can see in the output image below, there is a degree of pixilation in our images, however the resulting transformed image still retains sufficient information to enable the fitting of the model. 
+The raw input images from my dataset are of 200 pixels by 200 pixels with 3 dimensions (RGB colour space) . Initially I resized my images to 32 pixels by 32 pixels with 1 dimension of colour.
+As we can see in the output image below, there is a degree of pixilation in our images, however the resulting transformed image seems to retain sufficient information to enable the fitting of the model. 
 
 ![Modifed Bricks](/_ref/modified_brick_images.png)
 
@@ -49,5 +49,5 @@ It is also possible to examine the model accuracy by brick type :
 Interesting, while our overall accuracy is extremely high, there is a large divergence in accuracy between the training and validation datasets and also between individual bricks.
 * The “6632 Technic lever” shows 100% accuracy for both the Train and Validation datasets
 * Both the “3022 Plate” and the “3069 Flat Tile” show high levels of accuracy, both for the Train and Validation datasets, over 90% in both cases
-* The model seems to be having issues with the “3040 Roof Tile”, particularly for the Validation dataset. This may indicate that the model is overfitting for the Training dataset and is having issues when processing data it hasn’t encountered before from the Validation dataset.
+* The model seems to be having issues with the “3040 Roof Tile”, particularly for the Validation dataset. This may indicate that the model is overfitting for the Training dataset.
 
